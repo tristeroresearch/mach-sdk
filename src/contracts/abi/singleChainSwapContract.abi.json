@@ -1,0 +1,953 @@
+[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "ReentrancyGuardReentrantCall",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "MakerDefaulted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "MakerPulled",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "receiver",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "is_maker",
+				"type": "bool"
+			}
+		],
+		"name": "OrderPaidOut",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "is_maker",
+				"type": "bool"
+			}
+		],
+		"name": "OrderPlaced",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "OrderRefunded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "epoch",
+				"type": "uint256"
+			}
+		],
+		"name": "Resolved",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "CanResolve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "decimal",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "apply_fee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tkn",
+				"type": "address"
+			}
+		],
+		"name": "decimals",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "estimate_gas",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getAllOrders",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint96",
+						"name": "amount",
+						"type": "uint96"
+					},
+					{
+						"internalType": "uint24",
+						"name": "prev",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "next",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "epoch",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint96",
+						"name": "balance",
+						"type": "uint96"
+					}
+				],
+				"internalType": "struct Single.Order[]",
+				"name": "takers",
+				"type": "tuple[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint96",
+						"name": "amount",
+						"type": "uint96"
+					},
+					{
+						"internalType": "uint24",
+						"name": "prev",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "next",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "epoch",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint96",
+						"name": "balance",
+						"type": "uint96"
+					}
+				],
+				"internalType": "struct Single.Order[]",
+				"name": "makers",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getEpoch",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "epoch_result",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getFee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "fee",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getMakerIndex",
+		"outputs": [
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			},
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			},
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			},
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getMakers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint24",
+						"name": "index",
+						"type": "uint24"
+					},
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint96",
+						"name": "amount",
+						"type": "uint96"
+					},
+					{
+						"internalType": "uint24",
+						"name": "prev",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "next",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint96",
+						"name": "balance",
+						"type": "uint96"
+					},
+					{
+						"internalType": "uint24",
+						"name": "epoch",
+						"type": "uint24"
+					}
+				],
+				"internalType": "struct Single.MakerEndpoint[]",
+				"name": "active_makers",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getSums",
+		"outputs": [
+			{
+				"internalType": "uint96",
+				"name": "",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "",
+				"type": "uint96"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getTakerIndex",
+		"outputs": [
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			},
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			},
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			},
+			{
+				"internalType": "uint24",
+				"name": "",
+				"type": "uint24"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "getTakers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint24",
+						"name": "index",
+						"type": "uint24"
+					},
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint96",
+						"name": "amount",
+						"type": "uint96"
+					},
+					{
+						"internalType": "uint24",
+						"name": "next",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "epoch",
+						"type": "uint24"
+					}
+				],
+				"internalType": "struct Single.TakerEndpoint[]",
+				"name": "active_takers",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint96",
+				"name": "tkr0_sum",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "mkr0_sum",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "tkr1_sum",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "mkr1_sum",
+				"type": "uint96"
+			}
+		],
+		"name": "get_demands",
+		"outputs": [
+			{
+				"internalType": "uint96",
+				"name": "tkr0_demand",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "mkr0_demand",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "tkr1_demand",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "mkr1_demand",
+				"type": "uint96"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint96",
+				"name": "_quantity",
+				"type": "uint96"
+			}
+		],
+		"name": "placeMaker",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint96",
+				"name": "_quantity",
+				"type": "uint96"
+			}
+		],
+		"name": "placeTaker",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			}
+		],
+		"name": "send",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sell_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buy_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "set_fee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "settings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "epochspan",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "MARGIN_BPS",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "max_epochs",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "max_orders",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "gas",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lambda",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_epochspan",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_MARGIN_BPS",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_max_epochs",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_max_orders",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_gas",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_lambda",
+				"type": "uint256"
+			}
+		],
+		"name": "updateSettings",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]

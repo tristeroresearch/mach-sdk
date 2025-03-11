@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        /* Basic Options */
+        "target": "ES2022",                           /* Specify ECMAScript target version */
+        "module": "ES2022",                           /* Specify module code generation */
+        "lib": ["ES2022"],                             /* Specify library files to be included in the compilation */
+        "declaration": true,                           /* Generates corresponding '.d.ts' files */
+        "declarationMap": true,                        /* Generates sourcemaps for declarations */
+        "outDir": "./dist",                            /* Redirect output structure to the 'dist' folder */
+        "rootDir": "./src",                            /* Specify the root directory of input files */
+        "strict": false,                                /* Enable all strict type-checking options */
+        "esModuleInterop": true,                       /* Enables emit interoperability between CommonJS and ES Modules */
+        "forceConsistentCasingInFileNames": true,      /* Ensure consistent casing in file names */
+        "moduleResolution": "node",                    /* Specify module resolution strategy */
+        "resolveJsonModule": true,                     /* Include modules imported with '.json' extension */
+        "isolatedModules": true,                       /* Ensure that each file can be safely transpiled without relying on other files */
+        "skipLibCheck": true,                           /* Skip type checking of all declaration files */
+        "typeRoots": ["./src/@types", "@types", "node_modules/@types"]
+  },
+  "include": ["src", "**/*.ts", "**/**/*.ts", "**/**/**/*.ts", "**/**/**/**/*.ts"], /* Specify the root files to include */
+  "exclude": ["node_modules", "dist", "src/chains/solana", "src/libs/__mocks__", "**/*.test.ts"] /* Exclude specified files/folders */
+}
+
+
