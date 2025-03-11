@@ -1,16 +1,23 @@
 # Mach SDK
 
+## NOTE
+Some API endpoints are stale. They will soon be updated. For now, you can use the following code to manually set gas fee and priority fee:
+
+const sdk = await config;
+sdk.setGasRecommendationOverride(true);
+// Set gas fee higher than the current base fee (588802000)
+sdk.setGasFee(BigInt('700000000')); // 700 million wei (0.7 Gwei)
+sdk.setPriorityFee(BigInt('10000000')); // 10 million wei (0.01 Gwei)
+sdk.setGasLimit(BigInt('500000')); // Reduced gas limit to save on total cost
+
 ## Prerequisites
 
 - Node.js 20+
 
-## Internal Development
-
-While we are testing here internally, the appropriate npm package is `@ggarza5/mach-sdk1`.
-Installed in client scripts like this:
+## Installation
 
 ```bash
-npm install @ggarza5/mach-sdk1@latest
+npm install @tristeroresearch/mach-sdk@latest
 ```
 
 ## Documentation
