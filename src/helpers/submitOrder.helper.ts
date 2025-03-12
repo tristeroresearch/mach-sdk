@@ -19,32 +19,20 @@ import { type Quote } from '../@types/quote';
  * @returns The receipt of the order transaction
  * @description This helper function submits an order by calling approveToken, encoding order data, signing the transaction, and sending it to the blockchain.
  */
-export const submitOrder = async (
-  quote: Quote,
-  privateKey?: Hex,
-  gasData?: GasData,
-) => {
+export const submitOrder = async (quote: Quote, privateKey?: Hex, gasData?: GasData, referralCode?: string) => {
   try {
     //Throws an error if the private key is not found in the environment
     if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
     // Create wallet clients
-    const { publicClient } = createWalletClients(
-      quote.src_chain as Hex,
-      privateKey,
-    );
+    const { publicClient } = createWalletClients(quote.src_chain as Hex, privateKey);
 
     // Approve the token
     const approvalHash = await approveToken(quote, privateKey, gasData);
 
     // Then place the order
     const orderData = encodeOrderData(quote);
-    const orderSignedHash = await signTransaction(
-      orderData,
-      quote.src_chain as Hex,
-      privateKey,
-      gasData,
-    );
+    const orderSignedHash = await signTransaction(orderData, quote.src_chain as Hex, privateKey, gasData);
 
     // Send the order transaction
     const orderTx = { serializedTransaction: orderSignedHash };

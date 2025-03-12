@@ -19,11 +19,7 @@ import { ErrorMessage } from '../errors/constants';
 import { machExchangeApi } from '../libs/axios';
 import { type OrderItemResponse } from '../@types/orderResponse';
 
-export const marketMake = async (
-  orderData: any,
-  referralCode?: string,
-  referrer?: string,
-) => {
+export const marketMake = async (orderData: any, referralCode?: string, referrer?: string) => {
   if (orderData === undefined) {
     return {
       message: OrderResponseMessage.ErrorDecodingOrderData,
@@ -39,6 +35,8 @@ export const marketMake = async (
   if (referrer) payload.referrer = referrer;
 
   try {
+    console.log('Sending payload', payload, 'to /v1/orders');
+
     const response = await machExchangeApi.post('/v1/orders', payload);
     switch (response.status) {
       case 200:
@@ -55,11 +53,7 @@ export const marketMake = async (
           eta: response.data.eta,
         };
       case 400:
-        if (
-          response.data?.detail?.includes(
-            ErrorMessage.NoOrderPlacedLogsFoundInTxReceipt,
-          )
-        ) {
+        if (response.data?.detail?.includes(ErrorMessage.NoOrderPlacedLogsFoundInTxReceipt)) {
           return {
             message: OrderResponseMessage.OrderNotFound,
             status: ResultCode.Failure,
@@ -102,10 +96,7 @@ export const marketMake = async (
  * @param burnTx - The burn transaction
  * @returns The response from the post receive CCTP message api
  */
-export const apiNewPostReceiveCctpMessage = async (
-  srcChain: string,
-  burnTx: string,
-) => {
+export const apiNewPostReceiveCctpMessage = async (srcChain: string, burnTx: string) => {
   try {
     const response = await machExchangeApi.post('/v1/orders/cctp', {
       chain: srcChain.toLowerCase(),
@@ -142,7 +133,7 @@ export const apiGetOrderETA = async (
   dstChainName: string,
   srcAsset: string,
   dstAsset: string,
-  amount: bigint,
+  amount: bigint
 ) => {
   const params = {
     src_chain_name: srcChainName,
@@ -156,17 +147,13 @@ export const apiGetOrderETA = async (
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
 
-  const { data }: { data: any } = await machExchangeApi.get(
-    `/orderETA?${queryString}`,
-  );
+  const { data }: { data: any } = await machExchangeApi.get(`/orderETA?${queryString}`);
   // TODO: Add proper types to data instead of any!
 
   return data;
 };
 
 export const apiGetOrderHistory = async (address: string) => {
-  const { data }: { data: OrderItemResponse[] } = await machExchangeApi.get(
-    `/v1/orders?wallet=${address}`,
-  );
+  const { data }: { data: OrderItemResponse[] } = await machExchangeApi.get(`/v1/orders?wallet=${address}`);
   return data;
 };

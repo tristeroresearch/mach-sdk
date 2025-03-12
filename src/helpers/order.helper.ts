@@ -2,12 +2,7 @@
  * @fileoverview This file contains the helper function to place an order between two assets.
  */
 
-import {
-  getQuote,
-  submitOrder,
-  dollarToTokenValue,
-  getChainFromAssetAddress,
-} from '../index';
+import { getQuote, submitOrder, dollarToTokenValue, getChainFromAssetAddress } from '../index';
 import { marketMakeOrder } from './marketMakeOrder.helper';
 import { ErrorMessage } from '../errors/constants';
 import { attemptToLoadPrivateKeyFromEnv } from '../utils/attemptToLoadPrivateKeyFromEnv.util';
@@ -27,30 +22,20 @@ export const order = async (
   srcAsset: Asset | Hex,
   dstAsset: Asset | Hex,
   srcAmount: number,
+  referralCode?: string,
   gasData?: GasData,
-  privateKey?: Hex,
+  privateKey?: Hex
 ) => {
   //Throws an error if the private key is not found in the environment
   if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
-  const srcAssetAddress: Hex =
-    typeof srcAsset === 'string'
-      ? (srcAsset as Hex)
-      : (srcAsset.address as Hex);
-  const dstAssetAddress: Hex =
-    typeof dstAsset === 'string'
-      ? (dstAsset as Hex)
-      : (dstAsset.address as Hex);
+  const srcAssetAddress: Hex = typeof srcAsset === 'string' ? (srcAsset as Hex) : (srcAsset.address as Hex);
+  const dstAssetAddress: Hex = typeof dstAsset === 'string' ? (dstAsset as Hex) : (dstAsset.address as Hex);
   const amount = await dollarToTokenValue(srcAmount, srcAssetAddress);
-  const quote = await getQuote(
-    srcAssetAddress,
-    dstAssetAddress,
-    amount,
-    privateKey,
-  );
+  const quote = await getQuote(srcAssetAddress, dstAssetAddress, amount, privateKey);
   const receipt = await submitOrder(quote, privateKey, gasData);
   if (receipt == null) throw new Error(ErrorMessage.TransactionNotFound);
   const srcChain = await getChainFromAssetAddress(srcAssetAddress);
-  const response = await marketMakeOrder(srcChain, receipt);
+  const response = await marketMakeOrder(srcChain, receipt, referralCode);
   return response;
 };
