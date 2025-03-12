@@ -9,10 +9,7 @@ import { getMachGasRecommendation } from '../api';
 import { config } from '../config';
 import { ErrorMessage } from '../errors/constants';
 
-export const getGasForTransaction = async (
-  chainName: string,
-  gasData?: GasData,
-): Promise<GasData> => {
+export const getGasForTransaction = async (chainName: string, gasData?: GasData): Promise<GasData> => {
   const _config = await config;
   if (_config.getGasRecommendationOverride()) {
     if (!gasData) {
@@ -25,13 +22,11 @@ export const getGasForTransaction = async (
     return gasData;
   } else {
     const recommendedGas = await getMachGasRecommendation(chainName);
-    if (!recommendedGas)
-      throw new Error(ErrorMessage.FailedToFetchGasRecommendation);
+    if (!recommendedGas) throw new Error(ErrorMessage.FailedToFetchGasRecommendation);
     else {
       const gasForTransaction: GasData = {
-        gas_limit:
-          BigInt(recommendedGas.gas_estimate) * _config.getGasLimitMultiplier(),
-        gas_price: BigInt(recommendedGas.gas_price),
+        gas_limit: BigInt(recommendedGas.gas_estimate) * _config.getGasLimitMultiplier(),
+        gas_price: BigInt(recommendedGas.gas_price) * _config.getGasFeeMultiplier(),
         priority_fee: BigInt(_config.getPriorityFee()),
       };
       return gasForTransaction;

@@ -21,6 +21,7 @@ import {
   DEFAULT_MAX_FEE_PER_GAS,
   DEFAULT_MAX_PRIORITY_FEE_PER_GAS,
   DEFAULT_GAS_LIMIT_MULTIPLIER,
+  DEFAULT_GAS_FEE_MULTIPLIER,
 } from './configs/defaults';
 import { type Token } from './@types/token';
 import { type Network } from './@types/network';
@@ -53,6 +54,7 @@ interface Config extends InitialStateProps {
   feePerGas: bigint;
   gasLimitMultiplier: bigint;
   gasLimit: bigint;
+  gasFeeMultiplier: bigint;
 }
 
 let _config: Config = {
@@ -74,6 +76,7 @@ let _config: Config = {
   gasLimitMultiplier: BigInt(0),
   machGasRecommendationOverride: false,
   gasLimit: BigInt(0),
+  gasFeeMultiplier: BigInt(0),
 };
 
 export const setConfig = (newConfig: Partial<Config>) => {
@@ -111,6 +114,7 @@ export const config = (async () => {
     gasLimitMultiplier: BigInt(0),
     machGasRecommendationOverride: false,
     gasLimit: BigInt(0),
+    gasFeeMultiplier: BigInt(0),
   };
 
   const _isLoaded = false;
@@ -122,6 +126,7 @@ export const config = (async () => {
     _config.priorityFeePerGas = DEFAULT_MAX_PRIORITY_FEE_PER_GAS;
     _config.feePerGas = DEFAULT_MAX_FEE_PER_GAS;
     _config.gasLimitMultiplier = DEFAULT_GAS_LIMIT_MULTIPLIER;
+    _config.gasFeeMultiplier = DEFAULT_GAS_FEE_MULTIPLIER;
   }
 
   // Load the config from the Mach API
@@ -267,10 +272,7 @@ export const config = (async () => {
     },
 
     setWalletClients(privateKey: Hex, srcChain: string) {
-      const { publicClient, account } = createWalletClients(
-        srcChain,
-        privateKey,
-      );
+      const { publicClient, account } = createWalletClients(srcChain, privateKey);
 
       // Update the _config object with publicClient and account
       _config.publicClient = publicClient;
@@ -357,6 +359,14 @@ export const config = (async () => {
 
     setGasRecommendationOverride(gasRecommendationOverride: boolean) {
       _config.machGasRecommendationOverride = gasRecommendationOverride;
+    },
+
+    getGasFeeMultiplier() {
+      return _config.gasFeeMultiplier;
+    },
+
+    setGasFeeMultiplier(gasFeeMultiplier: bigint) {
+      _config.gasFeeMultiplier = gasFeeMultiplier;
     },
   };
 })();
