@@ -9,8 +9,6 @@
 /**
  * API function to send order data to the Mach Exchange backend to be processed and finalized
  * @param orderData - The order data
- * @param referralCode - The referral code
- * @param referrer - The referrer
  * @returns The response from the order data api
  * @todo Error status codes can't be caught the way that hey are now -- non-2xx status codes are instantly throwing errors from the axios call and are ending up in the catch block
  */
@@ -19,7 +17,7 @@ import { ErrorMessage } from '../errors/constants';
 import { machExchangeApi } from '../libs/axios';
 import { type OrderItemResponse } from '../@types/orderResponse';
 
-export const marketMake = async (orderData: any, referralCode?: string, referrer?: string) => {
+export const marketMake = async (orderData: any) => {
   if (orderData === undefined) {
     return {
       message: OrderResponseMessage.ErrorDecodingOrderData,
@@ -30,9 +28,6 @@ export const marketMake = async (orderData: any, referralCode?: string, referrer
     chain: orderData.sellChain,
     place_taker_tx: orderData.transactionHash,
   };
-
-  if (referralCode) payload.referral_code = referralCode;
-  if (referrer) payload.referrer = referrer;
 
   try {
     console.log('Sending payload', payload, 'to /v1/orders');

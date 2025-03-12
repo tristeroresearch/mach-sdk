@@ -22,7 +22,6 @@ export const order = async (
   srcAsset: Asset | Hex,
   dstAsset: Asset | Hex,
   srcAmount: number,
-  referralCode?: string,
   gasData?: GasData,
   privateKey?: Hex
 ) => {
@@ -36,6 +35,6 @@ export const order = async (
   const receipt = await submitOrder(quote, privateKey, gasData);
   if (receipt == null) throw new Error(ErrorMessage.TransactionNotFound);
   const srcChain = await getChainFromAssetAddress(srcAssetAddress);
-  const response = await marketMakeOrder(srcChain, receipt, referralCode);
+  const response = await marketMakeOrder(srcChain, receipt);
   return response;
 };

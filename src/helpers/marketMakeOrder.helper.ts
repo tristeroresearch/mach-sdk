@@ -14,7 +14,7 @@ import { ErrorMessage } from '../errors/constants.js';
  * @description This helper function processes a transaction receipt to extract order data and interacts with an API to complete the market-making process.
  * @todo Get srcChain from receipt
  */
-export const marketMakeOrder = async (srcChain: string, receipt: any, referralCode?: string) => {
+export const marketMakeOrder = async (srcChain: string, receipt: any) => {
   const encodedEventTopics = encodeEventTopics({
     abi: abi.orderBook,
     eventName: EventName.OrderPlaced,
@@ -26,6 +26,6 @@ export const marketMakeOrder = async (srcChain: string, receipt: any, referralCo
 
   const decodedData = processReceipt(receipt, encodedEventTopics, srcChain);
 
-  const response = await marketMake(decodedData[0], referralCode);
+  const response = await marketMake(decodedData[0]);
   return response;
 };

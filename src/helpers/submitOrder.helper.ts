@@ -19,7 +19,7 @@ import { type Quote } from '../@types/quote';
  * @returns The receipt of the order transaction
  * @description This helper function submits an order by calling approveToken, encoding order data, signing the transaction, and sending it to the blockchain.
  */
-export const submitOrder = async (quote: Quote, privateKey?: Hex, gasData?: GasData, referralCode?: string) => {
+export const submitOrder = async (quote: Quote, privateKey?: Hex, gasData?: GasData) => {
   try {
     //Throws an error if the private key is not found in the environment
     if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
