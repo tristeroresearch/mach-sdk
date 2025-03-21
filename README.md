@@ -1,15 +1,5 @@
 # Mach SDK
 
-## Prerequisites
-
-- Node.js 20+
-
-## Installation
-
-```bash
-npm install @tristeroresearch/mach-sdk@latest
-```
-
 ## Documentation
 
 - Documentation for the SDK can be found [here](https://machprotocol.com/api-reference/sdk/library/).
@@ -22,6 +12,67 @@ npm install @tristeroresearch/mach-sdk@latest
 - [ ] Full support for generic ERC20 swaps
 - [ ] Solana swaps
 - [ ] Tron swaps
+
+## Quickstart
+
+### Prerequisites
+
+- Node.js 20+
+
+### Installation
+
+```bash
+npm install @tristeroresearch/mach-sdk@latest
+```
+
+### Basic Usage
+
+- The SDK uses private keys transaction signing. It assumes that you store a private key in a local variable called `PRIVATE_KEY`.
+- Alternatively, you can pass a private key into the SDK functions, for example:
+
+```ts
+import { order } from '@tristeroresearch/mach-sdk';
+import { tokens } from '@tristeroresearch/mach-sdk/constants';
+
+order(tokens.arb.USDC, tokens.op.USDT, 10, null, 'example_private_key');
+```
+
+- In the above example, the `order` helper takes a source asset, a destination asset, an amount in dollars, a gas data object, and a private key
+- Since the gas object is not provided, the SDK will automatically fetch the recommended gas fees from the Mach API
+
+More simply, using `dotenv` to access a private key from the environment variables:
+
+```ts
+import { order, dollarToTokenValue } from '@tristeroresearch/mach-sdk';
+import { tokens } from '@tristeroresearch/mach-sdk/constants';
+
+// Convert $10 to token amount
+const amount = await dollarToTokenValue(10, tokens.arb.USDC);
+
+// Initiate a swap from Arbitrum USDC to Optimism USDT
+const result = await order(tokens.arb.USDC, tokens.op.USDT, amount);
+console.log(`Order complete: ${result.hash}`);
+```
+
+### Advanced Usage
+
+```ts
+import { getQuote, submitOrder, marketMakeOrder } from '@tristeroresearch/mach-sdk';
+import { tokens, chains } from '@tristeroresearch/mach-sdk/constants';
+
+// For advanced control over the process
+const key = process.env.PRIVATE_KEY as `0x${string}`;
+const amount = await dollarToTokenValue(5, tokens.arb.USDC);
+
+// Step 1: Get a quote
+const quote = await getQuote(tokens.arb.USDC, tokens.op.USDT, amount, key);
+
+// Step 2: Submit the order to the blockchain
+const receipt = await submitOrder(quote, key);
+
+// Step 3: Market make the order using the Mach market maker
+const response = await marketMakeOrder(chains.arb, receipt);
+```
 
 ## Project Structure
 
@@ -79,3 +130,7 @@ Contains utility functions for blockchain operations, such as:
 Contains utility functions for the SDK, such as:
 
 - Getting gas values for transactions (via `getGasForTransaction.util.ts`)
+
+```
+
+```
