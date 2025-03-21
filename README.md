@@ -56,6 +56,8 @@ console.log(`Order complete: ${result.hash}`);
 
 ### Advanced Usage
 
+You may want to manually control the process of getting a quote, submitting an order, and market making the order. You can use some more primitive helper functions like the following:
+
 ```ts
 import { getQuote, submitOrder, marketMakeOrder } from '@tristeroresearch/mach-sdk';
 import { tokens, chains } from '@tristeroresearch/mach-sdk/constants';
@@ -73,6 +75,11 @@ const receipt = await submitOrder(quote, key);
 // Step 3: Market make the order using the Mach market maker
 const response = await marketMakeOrder(chains.arb, receipt);
 ```
+
+### Notes on Mach Smart Contracts
+
+- Transactions are placed on chain via a smart contract function on Mach's `Orderbook` contract called `PlaceOrder`.
+- You can find the source code for the order book smart contract [here](https://github.com/tristeroresearch/OrderbookV2).
 
 ## Project Structure
 

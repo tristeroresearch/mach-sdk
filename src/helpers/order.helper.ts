@@ -16,12 +16,13 @@ import { type GasData } from '../@types/gasData';
  * @param dstAsset - The destination asset
  * @param srcAmount - The source amount
  * @param gasData - The gas data for the transaction
+ * @param privateKey - The private key for the transaction
  * @returns The response from the order data api
  */
 export const order = async (
   srcAsset: Asset | Hex,
   dstAsset: Asset | Hex,
-  srcAmount: number,
+  srcAmount: number | bigint,
   gasData?: GasData,
   privateKey?: Hex
 ) => {
@@ -30,10 +31,15 @@ export const order = async (
 
   const srcAssetAddress: Hex = typeof srcAsset === 'string' ? (srcAsset as Hex) : (srcAsset.address as Hex);
   const dstAssetAddress: Hex = typeof dstAsset === 'string' ? (dstAsset as Hex) : (dstAsset.address as Hex);
-  const amount = await dollarToTokenValue(srcAmount, srcAssetAddress);
+
+  let amount: string;
+  if (typeof srcAmount === 'number') amount = await dollarToTokenValue(srcAmount, srcAssetAddress);
+  else if (typeof srcAmount === 'bigint') amount = srcAmount.toString();
+
   const quote = await getQuote(srcAssetAddress, dstAssetAddress, amount, privateKey);
   const receipt = await submitOrder(quote, privateKey, gasData);
   if (receipt == null) throw new Error(ErrorMessage.TransactionNotFound);
+
   const srcChain = await getChainFromAssetAddress(srcAssetAddress);
   const response = await marketMakeOrder(srcChain, receipt);
   return response;
