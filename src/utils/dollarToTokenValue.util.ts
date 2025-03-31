@@ -10,12 +10,8 @@ import { config } from '../config.js';
 import { type Asset } from '../@types/asset';
 import { type Hex } from 'viem';
 import { ValidationError, UnknownError } from '../errors/errors.js';
-import { ErrorMessage, MachErrorCode } from '../errors/constants.js';
 
-export const dollarToTokenValue = async (
-  dollarValue: number,
-  token: Asset | Hex,
-): Promise<string> => {
+export const dollarToTokenValue = async (dollarValue: number, token: Asset | Hex): Promise<string> => {
   try {
     const tokenAddress = typeof token === 'string' ? token : token.address;
     // Access the config directly to get the available tokens
@@ -37,22 +33,17 @@ export const dollarToTokenValue = async (
         } catch (error) {
           throw new UnknownError(
             `Failed to convert dollar value to token: ${error.message}`,
-            error instanceof Error ? error : undefined,
+            error instanceof Error ? error : undefined
           );
         }
       }
     }
 
-    throw new ValidationError(
-      `Token with address ${tokenAddress} not found in available tokens`,
-    );
+    throw new ValidationError(`Token with address ${tokenAddress} not found in available tokens`);
   } catch (error) {
     if (error instanceof ValidationError || error instanceof UnknownError) {
       throw error; // Re-throw our custom errors
     }
-    throw new UnknownError(
-      `Error in dollarToTokenValue: ${error.message}`,
-      error instanceof Error ? error : undefined,
-    );
+    throw new UnknownError(`Error in dollarToTokenValue: ${error.message}`, error instanceof Error ? error : undefined);
   }
 };

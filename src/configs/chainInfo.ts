@@ -4,46 +4,36 @@
 import { SOLANA_CHAIN_ID } from '../chains/solana/utils';
 
 // How to display the chain names on the users' screens
-export const chainNames: { [key: string]: string } = {
+export const chainNames = {
+  ethereum: 'Ethereum',
+  optimism: 'Optimism',
   arbitrum: 'Arbitrum',
-  avalanche: 'Avalanche',
   celo: 'Celo',
   base: 'Base',
-  blast: 'Blast',
-  bsc: 'BSC',
-  ethereum: 'Ethereum',
-  mantle: 'Mantle',
-  mode: 'Mode',
-  opbnb: 'opBNB',
-  optimism: 'Optimism',
   polygon: 'Polygon',
-  scroll: 'Scroll',
-  solana: 'Solana',
-};
+  avalanche: 'Avalanche',
+  sepolia: 'Sepolia',
+  monadtestnet: 'Monad Testnet',
+} as const;
 
 // The EVM chain IDs of the networks that the Mach Protocol supports
-export const chainIds: { [key: string]: number } = {
+export const chainIds = {
+  ethereum: 1,
+  optimism: 10,
   arbitrum: 42161,
-  avalanche: 43114,
   celo: 42220,
   base: 8453,
-  blast: 81457,
-  bsc: 56,
-  ethereum: 1,
-  mantle: 5000,
-  mode: 34443,
-  opbnb: 204,
-  optimism: 10,
   polygon: 137,
-  scroll: 534352,
-  solana: SOLANA_CHAIN_ID,
-};
+  avalanche: 43114,
+  sepolia: 11155111,
+  monadtestnet: 10143,
+} as const;
 
 /**
  * A map of EVM chain IDs to chain names
  */
 export const chainNamesFromIds: { [key: number]: string } = Object.fromEntries(
-  Object.entries(chainIds).map(([key, value]) => [value, key]),
+  Object.entries(chainIds).map(([key, value]) => [value, key])
 );
 
 /**
@@ -73,30 +63,56 @@ export const lzV1ChainIds: Readonly<Record<number, number>> = {
 };
 
 // These correspond to the native gas token of the networks
-export const nativeTokens: { [key: string]: string } = {
+export const nativeTokens = {
+  ethereum: 'ETH',
+  optimism: 'ETH',
   arbitrum: 'ETH',
-  avalanche: 'AVAX',
   celo: 'CELO',
   base: 'ETH',
-  blast: 'ETH',
-  bsc: 'BNB',
-  ethereum: 'ETH',
-  mantle: 'MNT',
-  mode: 'ETH',
-  opbnb: 'BNB',
-  optimism: 'ETH',
   polygon: 'MATIC',
-  scroll: 'ETH',
-  solana: 'SOL',
+  avalanche: 'AVAX',
+  sepolia: 'ETH',
+  monadtestnet: 'MON',
+} as const;
+
+export const getChainName = (key: string): string => chainNames[key as keyof typeof chainNames] || key;
+
+export const getChainNameFromId = (id: number): string => chainNamesFromIds[id] || 'Unknown Chain';
+
+export const getGasToken = (key: string): string => nativeTokens[key as keyof typeof nativeTokens] || key;
+
+export const getChainId = (key: string): number => chainIds[key as keyof typeof chainIds] || 0;
+
+// Testnet chain IDs
+export const TESTNET_CHAIN_IDS = [11155111, 10143] as const; // Sepolia and Monad testnet
+
+// Mainnet chain IDs
+export const MAINNET_CHAIN_IDS = [1, 10, 42161, 42220, 8453, 137, 43114] as const;
+
+/**
+ * Checks if a chain ID is a testnet chain ID
+ * @param chainId - The chain ID to check
+ * @returns boolean indicating if the chain ID is a testnet chain ID
+ */
+export const isTestnetChain = (chainId: number): boolean => {
+  return TESTNET_CHAIN_IDS.includes(chainId as (typeof TESTNET_CHAIN_IDS)[number]);
 };
 
-export const getChainName = (key: string): string =>
-  chainNames[key] || 'Unknown Chain';
+/**
+ * Checks if a chain ID is a mainnet chain ID
+ * @param chainId - The chain ID to check
+ * @returns boolean indicating if the chain ID is a mainnet chain ID
+ */
+export const isMainnetChain = (chainId: number): boolean => {
+  return MAINNET_CHAIN_IDS.includes(chainId as (typeof MAINNET_CHAIN_IDS)[number]);
+};
 
-export const getChainNameFromId = (id: number): string =>
-  chainNamesFromIds[id] || 'Unknown Chain';
-
-export const getGasToken = (key: string): string =>
-  nativeTokens[key] || 'Unknown';
-
-export const getChainId = (key: string): number => chainIds[key] || -1;
+/**
+ * Validates if a chain ID matches the expected network mode (testnet/mainnet)
+ * @param chainId - The chain ID to validate
+ * @param isTestnet - Whether we're in testnet mode
+ * @returns boolean indicating if the chain is valid for the current mode
+ */
+export const validateChainForMode = (chainId: number, isTestnet: boolean): boolean => {
+  return isTestnet ? isTestnetChain(chainId) : isMainnetChain(chainId);
+};

@@ -809,6 +809,112 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
   },
 };
 
+export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
+  WETH: {
+    address: '0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9',
+    decimals: 18,
+    wrapped: true,
+    symbol_override: true,
+  },
+  USDC: {
+    address: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDC',
+    },
+  },
+  USDT: {
+    address: '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDT',
+    },
+  },
+  DAI: {
+    address: '0x68194a729c2450ad26072b3d33adacbcef39d574',
+    decimals: 18,
+  },
+  weth: {
+    address: '0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9',
+    decimals: 18,
+    wrapped: true,
+    symbol_override: true,
+  },
+  usdc: {
+    address: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDC',
+    },
+  },
+  usdt: {
+    address: '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDT',
+    },
+  },
+  dai: {
+    address: '0x68194a729c2450ad26072b3d33adacbcef39d574',
+    decimals: 18,
+  },
+};
+
+export const MONADTESTNET_ASSETS: { [key: string]: Asset } = {
+  WETH: {
+    address: '0xB5a30b0FDc5EA94A52fDc42e3E9760Cb8449Fb37',
+    decimals: 18,
+    wrapped: true,
+    symbol_override: true,
+  },
+  WMON: {
+    address: '0x760AfE86e5de5fa0Ee542fc7B7B713e1c5425701',
+    decimals: 18,
+    wrapped: true,
+    symbol_override: true,
+  },
+  wmon: {
+    address: '0x760AfE86e5de5fa0Ee542fc7B7B713e1c5425701',
+    decimals: 18,
+    wrapped: true,
+    symbol_override: true,
+  },
+  USDC: {
+    address: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDC',
+    },
+  },
+  USDT: {
+    address: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDT',
+    },
+  },
+  weth: {
+    address: '0xB5a30b0FDc5EA94A52fDc42e3E9760Cb8449Fb37',
+    decimals: 18,
+    wrapped: true,
+    symbol_override: true,
+  },
+  usdc: {
+    address: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDC',
+    },
+  },
+  usdt: {
+    address: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D',
+    decimals: 6,
+    cex_tickers: {
+      binance: 'USDT',
+    },
+  },
+};
+
 export const arb = ARBITRUM_ASSETS;
 export const ARB = ARBITRUM_ASSETS;
 
@@ -832,6 +938,12 @@ export const BASE = BASE_ASSETS;
 export const celo = CELO_ASSETS;
 export const CELO = CELO_ASSETS;
 
+export const sepolia = SEPOLIA_ASSETS;
+export const SEPOLIA = SEPOLIA_ASSETS;
+
+export const monadtestnet = MONADTESTNET_ASSETS;
+export const MONADTESTNET = MONADTESTNET_ASSETS;
+
 export const ASSETS: { [key: string]: { [key: string]: Asset } } = {
   ETHEREUM: ETHEREUM_ASSETS,
   OPTIMISM: OPTIMISM_ASSETS,
@@ -840,6 +952,8 @@ export const ASSETS: { [key: string]: { [key: string]: Asset } } = {
   BASE: BASE_ASSETS,
   POLYGON: POLYGON_ASSETS,
   AVALANCHE: AVALANCHE_ASSETS,
+  SEPOLIA: SEPOLIA_ASSETS,
+  MONADTESTNET: MONADTESTNET_ASSETS,
   ethereum: ETHEREUM_ASSETS,
   optimism: OPTIMISM_ASSETS,
   arbitrum: ARBITRUM_ASSETS,
@@ -847,10 +961,11 @@ export const ASSETS: { [key: string]: { [key: string]: Asset } } = {
   base: BASE_ASSETS,
   polygon: POLYGON_ASSETS,
   avalanche: AVALANCHE_ASSETS,
+  sepolia: SEPOLIA_ASSETS,
+  monadtestnet: MONADTESTNET_ASSETS,
   eth: ETHEREUM_ASSETS,
   op: OPTIMISM_ASSETS,
   opt: OPTIMISM_ASSETS,
-  avax: AVALANCHE_ASSETS,
   arb: ARBITRUM_ASSETS,
   matic: POLYGON_ASSETS,
   ETH: ETHEREUM_ASSETS,

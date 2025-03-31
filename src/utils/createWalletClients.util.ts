@@ -1,42 +1,60 @@
 /**
  * This helper function initializes wallet and public clients for a
  * specified blockchain network using a provided private key.
- * @param privateKey - The private key of the account
  * @param chain - The chain to create the wallet client for
+ * @param privateKey - The private key of the account (optional)
  * @returns The wallet client
  */
-import { privateKeyToAccount } from 'viem/accounts';
 import {
+  createPublicClient,
   createWalletClient,
   http,
-  createPublicClient,
+  type Chain,
+  type PublicClient,
   type WalletClient,
   type Account,
   type Hex,
-  type Chain,
 } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 import { getChainFromName } from './getChainFromName.util';
 import { attemptToLoadPrivateKeyFromEnv } from './attemptToLoadPrivateKeyFromEnv.util';
+import { ErrorMessage } from '../errors/constants';
 
-export const createWalletClients = (
+export const createWalletClients = async (
   chain: string,
-  privateKey?: Hex,
-): { publicClient: any; walletClient: WalletClient; account: Account } => {
-  //Throws an error if the private key is not found in the environment
-  if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
+  privateKey?: Hex
+): Promise<{
+  publicClient: any;
+  walletClient: WalletClient;
+  account: Account;
+}> => {
+  try {
+    // Throws an error if the private key is not found in the environment
+    if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
-  const selectedChain: Chain = getChainFromName(chain);
+    const selectedChain: Chain = await getChainFromName(chain);
 
-  const publicClient = createPublicClient({
-    chain: selectedChain,
-    transport: http(),
-  });
-  const cleanKey = privateKey?.replace('0x', '').padStart(64, '0');
-  const account: Account = privateKeyToAccount(`0x${cleanKey}`);
-  const walletClient: WalletClient = createWalletClient({
-    account,
-    chain: selectedChain,
-    transport: http(),
-  });
-  return { publicClient, walletClient, account };
+    // Clean and format the private key to ensure it's properly formatted
+    const cleanKey = privateKey?.replace('0x', '').padStart(64, '0');
+    const account = privateKeyToAccount(`0x${cleanKey}` as `0x${string}`);
+
+    const publicClient = createPublicClient({
+      chain: selectedChain,
+      transport: http(),
+    });
+
+    const walletClient = createWalletClient({
+      account,
+      chain: selectedChain,
+      transport: http(),
+    });
+
+    return {
+      publicClient,
+      walletClient,
+      account,
+    };
+  } catch (error) {
+    throw new Error(ErrorMessage.FailedToCreateWalletClients);
+  }
 };

@@ -14,6 +14,8 @@ import {
   BASE_ASSETS,
   POLYGON_ASSETS,
   AVALANCHE_ASSETS,
+  SEPOLIA_ASSETS,
+  MONADTESTNET_ASSETS,
   ASSETS,
   arb,
   eth,
@@ -23,6 +25,8 @@ import {
   polygon,
   base,
   celo,
+  sepolia,
+  monadtestnet,
   ARB,
   ETH,
   OP,
@@ -31,6 +35,8 @@ import {
   POLYGON,
   BASE,
   CELO,
+  SEPOLIA,
+  MONADTESTNET,
 } from './tokens.js';
 
 import {
@@ -41,6 +47,8 @@ import {
   BASE_CONTRACTS,
   POLYGON_CONTRACTS,
   AVALANCHE_CONTRACTS,
+  SEPOLIA_CONTRACTS,
+  MONADTESTNET_CONTRACTS,
 } from './contracts.js';
 
 export {
@@ -51,17 +59,38 @@ export {
   BASE_ASSETS,
   POLYGON_ASSETS,
   AVALANCHE_ASSETS,
+  SEPOLIA_ASSETS,
+  MONADTESTNET_ASSETS,
   ASSETS,
-};
-
-export {
+  arb,
+  eth,
+  op,
+  avax,
+  matic,
+  polygon,
+  base,
+  celo,
+  sepolia,
+  monadtestnet,
+  ARB,
+  ETH,
+  OP,
+  AVAX,
+  MATIC,
+  POLYGON,
+  BASE,
+  CELO,
+  SEPOLIA,
+  MONADTESTNET,
   ETHEREUM_CONTRACTS,
   OPTIMISM_CONTRACTS,
   ARBITRUM_CONTRACTS,
-  AVALANCHE_CONTRACTS,
-  POLYGON_CONTRACTS,
-  BASE_CONTRACTS,
   CELO_CONTRACTS,
+  BASE_CONTRACTS,
+  POLYGON_CONTRACTS,
+  AVALANCHE_CONTRACTS,
+  SEPOLIA_CONTRACTS,
+  MONADTESTNET_CONTRACTS,
 };
 
 export const tokens = {
@@ -72,6 +101,8 @@ export const tokens = {
   BASE_ASSETS,
   POLYGON_ASSETS,
   AVALANCHE_ASSETS,
+  SEPOLIA_ASSETS,
+  MONADTESTNET_ASSETS,
   arb,
   eth,
   op,
@@ -80,6 +111,8 @@ export const tokens = {
   polygon,
   base,
   celo,
+  sepolia,
+  monadtestnet,
   ARB,
   ETH,
   OP,
@@ -88,16 +121,20 @@ export const tokens = {
   POLYGON,
   BASE,
   CELO,
+  SEPOLIA,
+  MONADTESTNET,
 };
 
 export const contracts = {
   ETHEREUM_CONTRACTS,
   OPTIMISM_CONTRACTS,
   ARBITRUM_CONTRACTS,
-  AVALANCHE_CONTRACTS,
-  POLYGON_CONTRACTS,
-  BASE_CONTRACTS,
   CELO_CONTRACTS,
+  BASE_CONTRACTS,
+  POLYGON_CONTRACTS,
+  AVALANCHE_CONTRACTS,
+  SEPOLIA_CONTRACTS,
+  MONADTESTNET_CONTRACTS,
   arb: ARBITRUM_CONTRACTS,
   eth: ETHEREUM_CONTRACTS,
   op: OPTIMISM_CONTRACTS,
@@ -114,6 +151,8 @@ export const contracts = {
   POLYGON: POLYGON_CONTRACTS,
   BASE: BASE_CONTRACTS,
   CELO: CELO_CONTRACTS,
+  SEPOLIA: SEPOLIA_CONTRACTS,
+  MONADTESTNET: MONADTESTNET_CONTRACTS,
 };
 
 export const assets = tokens;
@@ -129,8 +168,6 @@ export const Constants = {
   chains,
 };
 
-export const MAX_UINT256 = BigInt(
-  '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-);
+export const MAX_UINT256 = BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
 
 export const EVM_ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';

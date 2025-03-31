@@ -79,3 +79,11 @@ export const CELO_CONTRACTS: Record<string, Hex> = {
   uniswap_v3_router: '0x4Dae2f939ACf50408e13d58534Ff8c2776d45265',
   uniswap_permit2: '0x000000000022D473030F116dDEE9F6B43aC78BA3',
 };
+
+export const SEPOLIA_CONTRACTS = {
+  order_book: '0xaf51ebe4c721909a8aa40cb4b1c4656b04cbc6b4',
+};
+
+export const MONADTESTNET_CONTRACTS: Record<string, Hex> = {
+  order_book: '0x432b53c0595400f3EE94DA737CFcCA12c84fe299',
+};

@@ -38,12 +38,14 @@ interface InitialStateProps {
   userId?: string;
   apiKey?: string;
   machGasRecommendationOverride: boolean;
+  isTestnet: boolean;
 }
 
 // The config interface extends the InitialStateProps type
 interface Config extends InitialStateProps {
   integrator: string;
   apiUrl: string;
+  origin: string;
   chains: any[];
   preloadChains: boolean;
   debug: boolean;
@@ -60,6 +62,7 @@ interface Config extends InitialStateProps {
 let _config: Config = {
   integrator: '',
   apiUrl: '',
+  origin: '',
   chains: [],
   preloadChains: false,
   debug: false,
@@ -77,6 +80,7 @@ let _config: Config = {
   machGasRecommendationOverride: false,
   gasLimit: BigInt(0),
   gasFeeMultiplier: BigInt(0),
+  isTestnet: false,
 };
 
 export const setConfig = (newConfig: Partial<Config>) => {
@@ -98,6 +102,7 @@ export const config = (async () => {
   const _config: Config = {
     integrator: '',
     apiUrl: '',
+    origin: '',
     chains: [],
     preloadChains: true,
     debug: false,
@@ -115,6 +120,7 @@ export const config = (async () => {
     machGasRecommendationOverride: false,
     gasLimit: BigInt(0),
     gasFeeMultiplier: BigInt(0),
+    isTestnet: false,
   };
 
   const _isLoaded = false;
@@ -123,6 +129,7 @@ export const config = (async () => {
   function initializeConfig() {
     _config.integrator = DEFAULT_INTEGRATOR;
     _config.apiUrl = BACKEND_API_URL;
+    _config.origin = '';
     _config.priorityFeePerGas = DEFAULT_MAX_PRIORITY_FEE_PER_GAS;
     _config.feePerGas = DEFAULT_MAX_FEE_PER_GAS;
     _config.gasLimitMultiplier = DEFAULT_GAS_LIMIT_MULTIPLIER;
@@ -271,8 +278,10 @@ export const config = (async () => {
       return _config.swapContracts;
     },
 
-    setWalletClients(privateKey: Hex, srcChain: string) {
-      const { publicClient, account } = createWalletClients(srcChain, privateKey);
+    async setWalletClients(privateKey: Hex, srcChain: string) {
+      const clients = await createWalletClients(srcChain, privateKey);
+      const publicClient = clients.publicClient;
+      const account = clients.account;
 
       // Update the _config object with publicClient and account
       _config.publicClient = publicClient;
@@ -361,12 +370,28 @@ export const config = (async () => {
       _config.machGasRecommendationOverride = gasRecommendationOverride;
     },
 
+    getTestnetMode() {
+      return _config.isTestnet;
+    },
+
+    setTestnetMode(isTestnet: boolean) {
+      _config.isTestnet = isTestnet;
+    },
+
     getGasFeeMultiplier() {
       return _config.gasFeeMultiplier;
     },
 
     setGasFeeMultiplier(gasFeeMultiplier: bigint) {
       _config.gasFeeMultiplier = gasFeeMultiplier;
+    },
+
+    getOrigin() {
+      return _config.origin;
+    },
+
+    setOrigin(origin: string) {
+      _config.origin = origin;
     },
   };
 })();

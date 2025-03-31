@@ -6,7 +6,7 @@ import { apiGetQuote } from '../api/quote.api';
 import { getChainFromAssetAddress } from '../utils/getChainFromAssetAddress.util';
 import { createWalletClients } from '../utils/createWalletClients.util';
 import { attemptToLoadPrivateKeyFromEnv } from '../utils/attemptToLoadPrivateKeyFromEnv.util';
-import { type Hex } from 'viem';
+import { type Hex, type Account } from 'viem';
 import { type Asset } from '../@types/asset';
 
 /**
@@ -17,31 +17,18 @@ import { type Asset } from '../@types/asset';
  * @param privateKey - The private key
  * @returns The quote
  */
-export const getQuote = async (
-  srcAsset: Asset | Hex,
-  dstAsset: Asset | Hex,
-  srcAmount: string,
-  privateKey?: Hex,
-) => {
+export const getQuote = async (srcAsset: Asset | Hex, dstAsset: Asset | Hex, srcAmount: string, privateKey?: Hex) => {
   //Throws an error if the private key is not found in the environment
   if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
-  const srcAssetAddress =
-    typeof srcAsset === 'string' ? srcAsset : srcAsset.address;
-  const dstAssetAddress =
-    typeof dstAsset === 'string' ? dstAsset : dstAsset.address;
+  const srcAssetAddress = typeof srcAsset === 'string' ? srcAsset : srcAsset.address;
+  const dstAssetAddress = typeof dstAsset === 'string' ? dstAsset : dstAsset.address;
   const srcChain = await getChainFromAssetAddress(srcAssetAddress);
   const dstChain = await getChainFromAssetAddress(dstAssetAddress);
-  const { account } = createWalletClients(srcChain, privateKey);
+  const clients = await createWalletClients(srcChain, privateKey);
+  const account = clients.account as Account;
 
   //Throws an error
-  const quote = await apiGetQuote(
-    account.address,
-    srcChain,
-    dstChain,
-    srcAssetAddress,
-    dstAssetAddress,
-    srcAmount,
-  );
+  const quote = await apiGetQuote(account.address, srcChain, dstChain, srcAssetAddress, dstAssetAddress, srcAmount);
   return quote;
 };

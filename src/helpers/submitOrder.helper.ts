@@ -2,21 +2,22 @@
  * @fileoverview This file contains the helper functions to approve a token and submit an order.
  */
 
-import { encodeOrderData } from './encodeOrderData.js';
-import { signTransaction } from './signTransaction.helper.js';
+import { approveToken } from './approveToken.helper';
+import { signTransaction } from './signTransaction.helper';
+import { encodeOrderData } from './encodeOrderData';
 import { createWalletClients } from '../utils/createWalletClients.util.js';
-import { approveToken } from './approveToken.helper.js';
-import { ErrorMessage } from '../errors/constants.js';
 import { GasData } from '../@types/gasData.js';
 import { attemptToLoadPrivateKeyFromEnv } from '../utils/attemptToLoadPrivateKeyFromEnv.util.js';
-import { type Hex } from 'viem';
+import { type Hex, type PublicClient } from 'viem';
 import { type Quote } from '../@types/quote';
+import { ErrorMessage } from '../errors/constants';
 
 /**
- * A helper function to submit an order by calling approveToken, encoding order data, signing the transaction, and sending it to the blockchain.
- * @param quote - The quote to submit the order for
- * @param key - The private key of the account to sign the transaction
- * @returns The receipt of the order transaction
+ * A helper function to submit an order
+ * @param quote - The quote to submit
+ * @param privateKey - The private key of the account to sign the transaction
+ * @param gasData - The gas data to use for the transaction
+ * @returns The transaction receipt
  * @description This helper function submits an order by calling approveToken, encoding order data, signing the transaction, and sending it to the blockchain.
  */
 export const submitOrder = async (quote: Quote, privateKey?: Hex, gasData?: GasData) => {
@@ -25,7 +26,8 @@ export const submitOrder = async (quote: Quote, privateKey?: Hex, gasData?: GasD
     if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
     // Create wallet clients
-    const { publicClient } = createWalletClients(quote.src_chain as Hex, privateKey);
+    const clients = await createWalletClients(quote.src_chain as Hex, privateKey);
+    const publicClient = clients.publicClient as PublicClient;
 
     // Approve the token
     const approvalHash = await approveToken(quote, privateKey, gasData);

@@ -1,43 +1,33 @@
-import { chains } from '../../constants/chains';
-import { createWalletClients } from '../../utils/createWalletClients.util.js';
-import { getChainFromName } from '../../utils/getChainFromName.util.js';
 import { arbitrum } from 'viem/chains';
-import dotenv from 'dotenv';
+import { createWalletClients } from '../../utils/createWalletClients.util';
+import { getChainFromName } from '../../utils/getChainFromName.util.js';
 import { Hex } from 'viem';
+import dotenv from 'dotenv';
 
 dotenv.config();
 // Mock dependencies
 jest.mock('../../utils/getChainFromName.util');
 
 describe('createWalletClients', () => {
-  it('should create wallet clients with valid inputs', () => {
-    // Arrange
+  const chain = 'arbitrum';
+  const privateKey = '0x123';
 
-    const privateKey = process.env.PRIVATE_KEY as Hex;
-    const chain = chains.arbitrum;
-
-    (getChainFromName as jest.Mock).mockReturnValue(arbitrum);
-    // Act
-    const { publicClient, walletClient, account } = createWalletClients(
-      chain,
-      privateKey,
-    );
-
-    // Assert that wallet clients are created
-    expect(publicClient).toBeDefined();
-    expect(walletClient).toBeDefined();
-    expect(account).toBeDefined();
-    expect(getChainFromName).toHaveBeenCalledWith(chain);
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (getChainFromName as jest.Mock).mockResolvedValue(arbitrum);
   });
 
-  it('should handle invalid chain names gracefully', () => {
-    // Arrange
-    (getChainFromName as jest.Mock).mockReturnValue(null);
-    const privateKey =
-      '0xabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef';
-    const chain = 'invalidChain';
+  it('should create wallet clients with the correct chain', async () => {
+    const result = await createWalletClients(chain, privateKey);
 
-    // Act & Assert
-    expect(() => createWalletClients(chain, privateKey)).toThrow();
+    expect(getChainFromName).toHaveBeenCalledWith(chain);
+    expect(result.publicClient.chain).toBe(arbitrum);
+    expect(result.walletClient.chain).toBe(arbitrum);
+  });
+
+  it('should throw an error if chain is not supported', async () => {
+    (getChainFromName as jest.Mock).mockRejectedValue(new Error('Chain not supported'));
+
+    await expect(createWalletClients(chain, privateKey)).rejects.toThrow();
   });
 });

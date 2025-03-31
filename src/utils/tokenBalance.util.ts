@@ -1,11 +1,11 @@
 import { createWalletClients } from './createWalletClients.util';
 import { getChainFromAssetAddress } from './getChainFromAssetAddress.util';
 import { abi } from '../contracts/index.js';
-import { getContract } from 'viem';
+import { readContract } from 'viem/actions';
 import { ErrorMessage } from '../errors/constants';
 import { attemptToLoadPrivateKeyFromEnv } from './attemptToLoadPrivateKeyFromEnv.util';
 import { type Asset } from '../@types/asset';
-import { type Hex, type GetContractReturnType } from 'viem';
+import { type Hex, type Address, type GetContractReturnType } from 'viem';
 
 /**
  * A helper function to retrieve the balance of a specified token for a wallet using the private key from environment variables.
@@ -18,21 +18,17 @@ export const tokenBalance = async (asset: Asset, privateKey?: Hex) => {
   if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
   const chain = await getChainFromAssetAddress(asset.address);
-  const { publicClient, account } = await createWalletClients(
-    chain,
-    privateKey,
-  );
+  const clients = await createWalletClients(chain, privateKey);
+  const publicClient = clients.publicClient;
+  const account = clients.account;
 
-  const contract = getContract({
-    address: asset.address as Hex,
+  const balance = await readContract(publicClient as any, {
+    address: asset.address as Address,
     abi: abi.erc20,
-    client: publicClient,
+    functionName: 'balanceOf',
+    args: [account.address],
   });
 
-  if (!hasReadFunction(contract))
-    throw new Error(ErrorMessage.ContractDoesNotHaveReadFunction);
-
-  const balance = await (contract as any).read.balanceOf([account.address]);
   return balance;
 };
 
@@ -44,12 +40,10 @@ export const tokenBalance = async (asset: Asset, privateKey?: Hex) => {
  */
 function hasReadFunction<
   Abi extends readonly unknown[],
-  Client extends
-    | { public?: never; wallet: never }
-    | { public: never; wallet?: never },
+  Client extends { public?: never; wallet: never } | { public: never; wallet?: never },
   Address extends Hex,
 >(
-  contract: GetContractReturnType<Abi, Client, Address>,
+  contract: GetContractReturnType<Abi, Client, Address>
 ): contract is GetContractReturnType<Abi, Client, Address> & { read: object } {
   return (contract as any).read !== undefined;
 }

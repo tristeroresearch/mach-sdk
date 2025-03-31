@@ -16,6 +16,10 @@ export enum ErrorName {
   WalletAddressZero = 'WalletAddressZero',
   FailedToFetchConfig = 'FailedToFetchConfig',
   FailedToFetchGasRecommendation = 'FailedToFetchGasRecommendation',
+  RpcError = 'RpcError',
+  InvalidChainForMode = 'InvalidChainForMode',
+  FailedToCreateWalletClients = 'FailedToCreateWalletClients',
+  NoWalletAddress = 'NoWalletAddress',
 }
 
 export type ErrorCode = MachErrorCode;
@@ -48,7 +52,7 @@ export enum ErrorMessage {
   ContractDoesNotHaveReadFunction = 'Contract does not have a read function - May have failed to get the contract or the provided ABI may be wrong',
   PrivateKeyNotSet = 'process.env.PRIVATE_KEY is not set. Order requires a private key in the environment.',
   TransactionOnDifferentChain = 'Transaction is on a different chain than the source chain.',
-  PrivateKeyNotPassed = 'Please pas your private key to set the wallet clients for the SDK (your private key is not stored!)',
+  PrivateKeyNotPassed = 'Please pass your private key to set the wallet clients for the SDK (your private key is not stored!)',
   NetworkParameterMissing = 'Required parameter "network" is missing.',
   WalletParameterMissing = 'Required parameter "wallet" is missing.',
   NoOrderPlacedLogsFoundInTxReceipt = 'no OrderPlaced logs found in tx receipt',
@@ -60,4 +64,10 @@ export enum ErrorMessage {
   FailedToFetchQuote = 'Failed to fetch quote for the provided parameters. Please try again.',
   TokenNotFound = 'Token not found in available tokens. Please check the token address.',
   DollarConversionFailed = 'Failed to convert dollar value to token amount.',
+  InvalidChainForMode = 'Invalid chain for current network mode',
+  RpcError = 'RPC Error',
+  TransactionError = 'Transaction Error',
+  ValidationError = 'Validation Error',
+  FailedToCreateWalletClients = 'Failed to create wallet clients',
+  NoWalletAddress = 'No wallet address found',
 }
