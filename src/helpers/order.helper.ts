@@ -22,7 +22,7 @@ import { type GasData } from '../@types/gasData';
 export const order = async (
   srcAsset: Asset | Hex,
   dstAsset: Asset | Hex,
-  srcAmount: number | bigint,
+  srcAmount: number | bigint | string,
   gasData?: GasData,
   privateKey?: Hex
 ) => {
