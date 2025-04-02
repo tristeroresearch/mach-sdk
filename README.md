@@ -54,8 +54,8 @@ const sdkConfig = await config;
 // Enable testnet mode (automatically sets the testnet API URL)
 await sdkConfig.setTestnetMode(true);
 
-// Use testnet tokens for swaps
-console.log(await order(tokens.monadtestnet.wmon, tokens.monadtestnet.usdc, 0.005));
+// Use testnet tokens for swaps (e.g., Sepolia tokens)
+console.log(await order(tokens.sepolia.USDC, tokens.sepolia.USDT, 0.005));
 
 // Switch back to mainnet mode
 await sdkConfig.setMainnetMode(true);
@@ -64,7 +64,8 @@ await sdkConfig.setMainnetMode(true);
 When testnet mode is enabled:
 
 - All operations will use testnet contracts and endpoints
-- You must use testnet tokens (available in `tokens.*testnet.*`)
+- You must use testnet tokens (available in `tokens.sepolia.*`, `tokens.monadtestnet.*`, etc.)
+- You must use testnet contracts (available in `contracts.sepolia.*`, `contracts.monadtestnet.*`, etc.)
 - Mainnet tokens and contracts will not work
 - The API URL is automatically set to the testnet endpoint
 - This is useful for development and testing without using real assets
