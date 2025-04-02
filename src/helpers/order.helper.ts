@@ -35,6 +35,8 @@ export const order = async (
   let amount: string;
   if (typeof srcAmount === 'number') amount = await dollarToTokenValue(srcAmount, srcAssetAddress);
   else if (typeof srcAmount === 'bigint') amount = srcAmount.toString();
+  else if (typeof srcAmount === 'string') amount = srcAmount;
+  else throw new Error('Invalid source amount type');
 
   const quote = await getQuote(srcAssetAddress, dstAssetAddress, amount, privateKey);
 
