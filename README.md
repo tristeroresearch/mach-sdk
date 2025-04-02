@@ -40,6 +40,42 @@ order(tokens.arb.USDC, tokens.op.USDT, 10, null, 'example_private_key');
 - In the above example, the `order` helper takes a source asset, a destination asset, an amount in dollars, a gas data object, and a private key
 - Since the gas object is not provided, the SDK will automatically fetch the recommended gas fees from the Mach API
 
+#### Testnet Support
+
+The SDK supports both mainnet and testnet environments. When in testnet mode, you cannot use mainnet tokens or contracts. To use testnet:
+
+```ts
+import { order, config } from '@tristeroresearch/mach-sdk';
+import { tokens } from '@tristeroresearch/mach-sdk/constants';
+
+// Initialize the SDK config
+const sdkConfig = await config;
+
+// Enable testnet mode (automatically sets the testnet API URL)
+await sdkConfig.setTestnetMode(true);
+
+// Use testnet tokens for swaps
+console.log(await order(tokens.monadtestnet.wmon, tokens.monadtestnet.usdc, 0.005));
+
+// Switch back to mainnet mode
+await sdkConfig.setMainnetMode(true);
+```
+
+When testnet mode is enabled:
+
+- All operations will use testnet contracts and endpoints
+- You must use testnet tokens (available in `tokens.*testnet.*`)
+- Mainnet tokens and contracts will not work
+- The API URL is automatically set to the testnet endpoint
+- This is useful for development and testing without using real assets
+
+You can check the current mode using:
+
+```ts
+const isTestnet = await sdkConfig.getTestnetMode();
+const isMainnet = await sdkConfig.getMainnetMode();
+```
+
 More simply, using `dotenv` to access a private key from the environment variables:
 
 ```ts

@@ -15,7 +15,7 @@ import { ConfigLoadingStatus } from './enums';
 import { createWalletClients } from './utils/createWalletClients.util';
 import { type Hex } from 'viem';
 import { apiGetConfig } from './api';
-import { BACKEND_API_URL } from './configs/env';
+import { BACKEND_API_URL, TESTNET_BACKEND_API_URL } from './configs/env';
 import {
   DEFAULT_INTEGRATOR,
   DEFAULT_MAX_FEE_PER_GAS,
@@ -379,8 +379,22 @@ export const config = (async () => {
       return _config.isTestnet;
     },
 
-    setTestnetMode(isTestnet: boolean) {
+    getMainnetMode() {
+      return !_config.isTestnet;
+    },
+
+    async setTestnetMode(isTestnet: boolean) {
       _config.isTestnet = isTestnet;
+      // Automatically set the appropriate API URL based on testnet mode
+      const apiUrl = isTestnet ? TESTNET_BACKEND_API_URL : BACKEND_API_URL;
+      await this.setApiUrl(apiUrl);
+    },
+
+    async setMainnetMode(isMainnet: boolean) {
+      _config.isTestnet = !isMainnet;
+      // Automatically set the appropriate API URL based on mainnet mode
+      const apiUrl = isMainnet ? BACKEND_API_URL : TESTNET_BACKEND_API_URL;
+      await this.setApiUrl(apiUrl);
     },
 
     getGasFeeMultiplier() {
