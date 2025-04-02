@@ -37,6 +37,7 @@ export const order = async (
   else if (typeof srcAmount === 'bigint') amount = srcAmount.toString();
 
   const quote = await getQuote(srcAssetAddress, dstAssetAddress, amount, privateKey);
+
   const receipt = await submitOrder(quote, privateKey, gasData);
   if (receipt == null) throw new Error(ErrorMessage.TransactionNotFound);
 

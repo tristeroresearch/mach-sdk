@@ -25,6 +25,7 @@ import {
 } from './configs/defaults';
 import { type Token } from './@types/token';
 import { type Network } from './@types/network';
+import { recreateMachExchangeApi } from './libs/axios';
 
 // The initial state props interface, defined as an interface to allow extension by the Config interface
 interface InitialStateProps {
@@ -137,9 +138,9 @@ export const config = (async () => {
   }
 
   // Load the config from the Mach API
-  async function loadConfig() {
-    // If the config is already loaded, return
-    if (_isLoaded) return;
+  async function loadConfig(force: boolean = false) {
+    // If the config is already loaded and not forcing reload, return
+    if (_isLoaded && !force) return;
 
     // Fetch the config from the Mach API
     // If the config is not available, an error will be thrown in the apiGetConfig function
@@ -310,8 +311,12 @@ export const config = (async () => {
       return _config.apiUrl;
     },
 
-    setApiUrl(apiUrl: string) {
+    async setApiUrl(apiUrl: string) {
       _config.apiUrl = apiUrl;
+      // Recreate the axios instance with the new URL
+      recreateMachExchangeApi(apiUrl);
+      // Reload the config when API URL changes, forcing a reload
+      await loadConfig(true);
     },
 
     getPriorityFeePerGas() {

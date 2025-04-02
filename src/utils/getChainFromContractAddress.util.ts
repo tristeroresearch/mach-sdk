@@ -10,6 +10,8 @@ import {
   POLYGON_CONTRACTS,
   BASE_CONTRACTS,
   CELO_CONTRACTS,
+  MONADTESTNET_CONTRACTS,
+  SEPOLIA_CONTRACTS,
 } from '../constants/contracts';
 
 const CONTRACTS_MAP = {
@@ -20,6 +22,8 @@ const CONTRACTS_MAP = {
   Polygon: POLYGON_CONTRACTS,
   Base: BASE_CONTRACTS,
   Celo: CELO_CONTRACTS,
+  MonadTestnet: MONADTESTNET_CONTRACTS,
+  Sepolia: SEPOLIA_CONTRACTS,
 };
 
 /**
@@ -28,9 +32,7 @@ const CONTRACTS_MAP = {
  * @returns The name of the blockchain network or null if no match is found
  * @description This helper function determines the blockchain network associated with a given contract address by checking against known contract addresses.
  */
-export const getChainFromContractAddress = (
-  contractAddress: Hex,
-): string | null => {
+export const getChainFromContractAddress = (contractAddress: Hex): string | null => {
   const normalizedAddress = contractAddress.toLowerCase();
   for (const [chainName, contracts] of Object.entries(CONTRACTS_MAP))
     if (

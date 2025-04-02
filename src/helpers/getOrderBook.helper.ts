@@ -6,6 +6,8 @@ import {
   BASE_CONTRACTS,
   OPTIMISM_CONTRACTS,
   POLYGON_CONTRACTS,
+  MONADTESTNET_CONTRACTS,
+  SEPOLIA_CONTRACTS,
 } from '../constants/index.js';
 
 // This helper function retrieves the order book contract address for a specified blockchain network.
@@ -31,6 +33,10 @@ export const getOrderBook = (network: string) => {
       return CELO_CONTRACTS['order_book'];
     case 'base':
       return BASE_CONTRACTS['order_book'];
+    case 'monadtestnet':
+      return MONADTESTNET_CONTRACTS['order_book'];
+    case 'sepolia':
+      return SEPOLIA_CONTRACTS['order_book'];
   }
   return null;
 };

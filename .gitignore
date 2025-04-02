@@ -5,3 +5,4 @@ dist
 .npmrc
 .prettierrc
 .DS_Store
+buildInstallLocal.sh

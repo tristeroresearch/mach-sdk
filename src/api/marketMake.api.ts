@@ -30,8 +30,6 @@ export const marketMake = async (orderData: any) => {
   };
 
   try {
-    console.log('Sending payload', payload, 'to /v1/orders');
-
     const response = await machExchangeApi.post('/v1/orders', payload);
     switch (response.status) {
       case 200:

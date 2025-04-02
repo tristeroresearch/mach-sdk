@@ -21,7 +21,7 @@ import { getOrderBook } from './getOrderBook.helper';
  * @returns The signed transaction
  * @description This helper function signs a transaction for a specified contract and chain using the provided private key and data.
  */
-export const signTransaction = async (transactionData: Hex, chainName, privateKey?: Hex, gasData?: GasData) => {
+export const signTransaction = async (transactionData: Hex, chainName: string, privateKey?: Hex, gasData?: GasData) => {
   if (!privateKey) privateKey = attemptToLoadPrivateKeyFromEnv(privateKey);
 
   const clients = await createWalletClients(chainName, privateKey);
