@@ -7,4 +7,5 @@ export type Asset = {
     [key: string]: string;
   };
   usd_est?: number;
+  image_url?: string;
 };

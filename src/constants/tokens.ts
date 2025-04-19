@@ -13,6 +13,8 @@ export const ETHEREUM_ASSETS: { [key: string]: Asset } = {
     decimals: 18,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   USDC: {
     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
@@ -20,14 +22,18 @@ export const ETHEREUM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     decimals: 6,
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   DAI: {
     address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
     decimals: 18,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
   },
   AUSD: {
     address: '0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a',
@@ -38,6 +44,8 @@ export const ETHEREUM_ASSETS: { [key: string]: Asset } = {
     decimals: 18,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   usdc: {
     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
@@ -45,14 +53,18 @@ export const ETHEREUM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     decimals: 6,
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   dai: {
     address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
     decimals: 18,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
   },
   ausd: {
     address: '0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a',
@@ -66,6 +78,8 @@ export const OPTIMISM_ASSETS: { [key: string]: Asset } = {
     usd_est: 3e14,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   USDC: {
     address: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85',
@@ -73,6 +87,7 @@ export const OPTIMISM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58',
@@ -80,10 +95,13 @@ export const OPTIMISM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   DAI: {
     address: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
     decimals: 18,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
   },
   crvUSD: {
     address: '0xC52D7F23a2e460248Db6eE192Cb23dD12bDDCbf6',
@@ -112,6 +130,8 @@ export const OPTIMISM_ASSETS: { [key: string]: Asset } = {
     usd_est: 3e14,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   usdc: {
     address: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85',
@@ -119,6 +139,7 @@ export const OPTIMISM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58',
@@ -126,10 +147,13 @@ export const OPTIMISM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   dai: {
     address: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
     decimals: 18,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
   },
   crvusd: {
     address: '0xC52D7F23a2e460248Db6eE192Cb23dD12bDDCbf6',
@@ -161,6 +185,8 @@ export const ARBITRUM_ASSETS: { [key: string]: Asset } = {
     usd_est: 3e14,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   USDC: {
     address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
@@ -168,6 +194,7 @@ export const ARBITRUM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
@@ -175,6 +202,7 @@ export const ARBITRUM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   eth: {
     address: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
@@ -182,6 +210,8 @@ export const ARBITRUM_ASSETS: { [key: string]: Asset } = {
     usd_est: 3e14,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   usdc: {
     address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
@@ -189,6 +219,7 @@ export const ARBITRUM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
@@ -196,6 +227,7 @@ export const ARBITRUM_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   crvUSD: {
     address: '0x498Bf2B1e120FeD3ad3D42EA2165E9b73f99C1e5',
@@ -214,6 +246,7 @@ export const CELO_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e',
@@ -222,6 +255,7 @@ export const CELO_ASSETS: { [key: string]: Asset } = {
       binance: 'USDT',
     },
     symbol_override: true,
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdc: {
     address: '0xcebA9300f2b948710d2653dD7B07f33A8B32118C',
@@ -229,6 +263,7 @@ export const CELO_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e',
@@ -236,6 +271,7 @@ export const CELO_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
 };
 
@@ -246,6 +282,8 @@ export const BASE_ASSETS: { [key: string]: Asset } = {
     usd_est: 3e14,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   USDC: {
     address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
@@ -253,6 +291,7 @@ export const BASE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDbC: {
     address: '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA',
@@ -325,6 +364,8 @@ export const BASE_ASSETS: { [key: string]: Asset } = {
     usd_est: 3e14,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   usdc: {
     address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
@@ -332,6 +373,7 @@ export const BASE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e',
@@ -339,6 +381,7 @@ export const BASE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdbc: {
     address: '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA',
@@ -414,6 +457,7 @@ export const POLYGON_ASSETS: { [key: string]: Asset } = {
     usd_est: 5e17,
     wrapped: true,
     symbol_override: true,
+    image_url: 'https://static.debank.com/image/matic_token/logo_url/matic/6f5a6b6f0732a7a235131bd7804d357c.png',
   },
   USDC: {
     address: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
@@ -421,6 +465,7 @@ export const POLYGON_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
@@ -428,6 +473,7 @@ export const POLYGON_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   DAI: {
     address: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
@@ -574,6 +620,7 @@ export const POLYGON_ASSETS: { [key: string]: Asset } = {
     usd_est: 5e17,
     wrapped: true,
     symbol_override: true,
+    image_url: 'https://static.debank.com/image/matic_token/logo_url/matic/6f5a6b6f0732a7a235131bd7804d357c.png',
   },
   usdc: {
     address: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
@@ -581,6 +628,7 @@ export const POLYGON_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
@@ -588,6 +636,7 @@ export const POLYGON_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   dai: {
     address: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
@@ -737,6 +786,7 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
     usd_est: 4e16,
     wrapped: true,
     symbol_override: true,
+    image_url: 'https://static.debank.com/image/avax_token/logo_url/avax/0b9c84359c84d6bdd5bfda9c2d4c4a82.png',
   },
   USDC: {
     address: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
@@ -744,6 +794,7 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDt: {
     address: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
@@ -751,6 +802,7 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   FRAX: {
     address: '0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64',
@@ -775,6 +827,7 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
     usd_est: 4e16,
     wrapped: true,
     symbol_override: true,
+    image_url: 'https://static.debank.com/image/avax_token/logo_url/avax/0b9c84359c84d6bdd5bfda9c2d4c4a82.png',
   },
   usdc: {
     address: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
@@ -782,6 +835,7 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
@@ -789,6 +843,7 @@ export const AVALANCHE_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   frax: {
     address: '0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64',
@@ -815,6 +870,8 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
     decimals: 18,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   USDC: {
     address: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
@@ -822,6 +879,7 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06',
@@ -829,16 +887,21 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   DAI: {
     address: '0x68194a729c2450ad26072b3d33adacbcef39d574',
     decimals: 18,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
   },
   weth: {
     address: '0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9',
     decimals: 18,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   usdc: {
     address: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
@@ -846,6 +909,7 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06',
@@ -853,10 +917,13 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   dai: {
     address: '0x68194a729c2450ad26072b3d33adacbcef39d574',
     decimals: 18,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
   },
 };
 
@@ -866,6 +933,8 @@ export const MONADTESTNET_ASSETS: { [key: string]: Asset } = {
     decimals: 18,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   WMON: {
     address: '0x760AfE86e5de5fa0Ee542fc7B7B713e1c5425701',
@@ -885,6 +954,7 @@ export const MONADTESTNET_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   USDT: {
     address: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D',
@@ -892,12 +962,15 @@ export const MONADTESTNET_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   weth: {
     address: '0xB5a30b0FDc5EA94A52fDc42e3E9760Cb8449Fb37',
     decimals: 18,
     wrapped: true,
     symbol_override: true,
+    image_url:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   usdc: {
     address: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea',
@@ -905,6 +978,7 @@ export const MONADTESTNET_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDC',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
   usdt: {
     address: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D',
@@ -912,6 +986,7 @@ export const MONADTESTNET_ASSETS: { [key: string]: Asset } = {
     cex_tickers: {
       binance: 'USDT',
     },
+    image_url: 'https://assets.coingecko.com/coins/images/1280/large/usdt.png?1696506707',
   },
 };
 
