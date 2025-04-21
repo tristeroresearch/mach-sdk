@@ -863,12 +863,6 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
     },
     logoURI: 'https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661',
   },
-  DAI: {
-    address: '0x68194a729c2450ad26072b3d33adacbcef39d574',
-    decimals: 18,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
-  },
   weth: {
     address: '0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9',
     decimals: 18,
@@ -892,84 +886,6 @@ export const SEPOLIA_ASSETS: { [key: string]: Asset } = {
       binance: 'USDT',
     },
     logoURI: 'https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661',
-  },
-  dai: {
-    address: '0x68194a729c2450ad26072b3d33adacbcef39d574',
-    decimals: 18,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
-  },
-  usdm: {
-    address: '0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/31719/large/usdm.png?1696530540',
-  },
-  crvusd: {
-    address: '0x417Ac0e078398C154EdFadD9Ef675d30Be60Af93',
-    decimals: 18,
-    logoURI:
-      'https://coin-images.coingecko.com/coins/images/30118/large/0xf939e0a03fb07f59a73314e73794be0e57ac1b4e.png?1721097561',
-  },
-  usdbc: {
-    address: '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA',
-    decimals: 6,
-  },
-  cgusd: {
-    address: '0xCa72827a3D211CfD8F6b00Ac98824872b72CAb49',
-    decimals: 6,
-  },
-  axludsc: {
-    address: '0xEB466342C4d449BC9f53A865D5Cb90586f405215',
-    decimals: 6,
-  },
-  tbtc: {
-    address: '0x236aa50979D5f3De3Bd1Eeb40E81137F22ab794b',
-    decimals: 18,
-    usd_est: 2e13,
-    logoURI:
-      'https://coin-images.coingecko.com/coins/images/11224/large/0x18084fba666a33d37592fa2633fd49a74dd93a88.png?1696511155',
-  },
-  usdz: {
-    address: '0x04D5ddf5f3a8939889F11E97f8c4BB48317F1938',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/38039/large/usdz-image-200x200.png?1716334412',
-  },
-  weteth: {
-    address: '0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452',
-    decimals: 18,
-  },
-  ezeth: {
-    address: '0x2416092f143378750bb29b79eD961ab195CcEea5',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/34753/large/Ezeth_logo_circle.png?1713496404',
-  },
-  reth: {
-    address: '0xB6fe221Fe9EeF5aBa221c348bA20A1Bf5e73624c',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/20764/large/reth.png?1696520159',
-  },
-  aero: {
-    address: '0x940181a94A35A4569E4529A3CDfB74e38FD98631',
-    decimals: 18,
-  },
-  rdnt: {
-    address: '0xd722E55C1d9D9fA0021A5215Cbb904b92B3dC5d4',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/26536/large/Radiant-Logo-200x200.png?1696525610',
-  },
-  miggles: {
-    address: '0xB1a03EdA10342529bBF8EB700a06C60441fEf25d',
-    decimals: 18,
-  },
-  yfi: {
-    address: '0x9EaF8C1E34F05a589EDa6BAfdF391Cf6Ad3CB239',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/11849/large/yearn.jpg?1696511720',
-  },
-  zro: {
-    address: '0x6985884C4392D348587B19cb9eAAf157F13271cd',
-    decimals: 18,
-    logoURI: 'https://coin-images.coingecko.com/coins/images/28206/large/ftxG9_TJ_400x400.jpeg?1696527208',
   },
 };
 
