@@ -17,7 +17,7 @@ import { type GasData } from '../@types/gasData';
  * @param srcAmount - The source amount
  * @param gasData - The gas data for the transaction
  * @param privateKey - The private key for the transaction
- * @returns The response from the order data api
+ * @returns The response from the order data api with transaction hash
  */
 export const order = async (
   srcAsset: Asset | Hex,
@@ -45,5 +45,10 @@ export const order = async (
 
   const srcChain = await getChainFromAssetAddress(srcAssetAddress);
   const response = await marketMakeOrder(srcChain, receipt);
-  return response;
+
+  // Include transaction hash in the response
+  return {
+    ...response,
+    transactionHash: receipt.transactionHash,
+  };
 };
