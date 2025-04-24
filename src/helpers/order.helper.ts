@@ -9,6 +9,7 @@ import { attemptToLoadPrivateKeyFromEnv } from '../utils/attemptToLoadPrivateKey
 import { type Asset } from '../@types/asset';
 import { type Hex } from 'viem';
 import { type GasData } from '../@types/gasData';
+import { tokenBalance } from '../utils/tokenBalance.util';
 
 /**
  * A helper function to place an order between two assets by converting asset amounts, retrieving quotes, submitting orders, and completing market-making processes.
@@ -37,6 +38,13 @@ export const order = async (
   else if (typeof srcAmount === 'bigint') amount = srcAmount.toString();
   else if (typeof srcAmount === 'string') amount = srcAmount;
   else throw new Error('Invalid source amount type');
+
+  // Check if user has sufficient balance
+  const srcAssetObj: Asset = typeof srcAsset === 'string' ? { address: srcAsset, decimals: 18 } : srcAsset;
+  const userBalance = await tokenBalance(srcAssetObj);
+  if (userBalance && BigInt(amount) > BigInt(userBalance.toString())) {
+    throw new Error('Insufficient balance for the order');
+  }
 
   const quote = await getQuote(srcAssetAddress, dstAssetAddress, amount, privateKey);
 
